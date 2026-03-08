@@ -1,0 +1,644 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Para Angie - 8M Dia de la Mujer</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Raleway:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #12081a;
+      --bg-card: #1e1028;
+      --fg: #fef7ff;
+      --accent: #e879f9;
+      --accent-light: #f5d0fe;
+      --accent-deep: #a855f7;
+      --magenta: #db2777;
+      --purple: #9333ea;
+      --border: rgba(232, 121, 249, 0.2);
+    }
+    
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    
+    body {
+      font-family: 'Raleway', sans-serif;
+      background: var(--bg);
+      color: var(--fg);
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+    
+    .font-display { font-family: 'Cinzel', serif; }
+    
+    .bg-layer {
+      position: fixed;
+      inset: 0;
+      z-index: 0;
+      background: 
+        radial-gradient(ellipse 100% 80% at 50% 0%, rgba(147, 51, 234, 0.15), transparent 50%),
+        radial-gradient(ellipse 80% 60% at 80% 100%, rgba(219, 39, 119, 0.12), transparent 50%),
+        radial-gradient(ellipse 60% 50% at 10% 70%, rgba(168, 85, 247, 0.1), transparent 50%);
+    }
+    
+    .floating-elements {
+      position: absolute;
+      inset: 0;
+      overflow: hidden;
+      pointer-events: none;
+    }
+    
+    .float-circle {
+      position: absolute;
+      border-radius: 50%;
+      border: 1px solid;
+      animation: floatRotate 20s linear infinite;
+    }
+    
+    .fc-1 { width: 200px; height: 200px; border-color: rgba(232, 121, 249, 0.15); top: 10%; right: 5%; }
+    .fc-2 { width: 150px; height: 150px; border-color: rgba(168, 85, 247, 0.12); bottom: 15%; left: 8%; animation-direction: reverse; animation-duration: 25s; }
+    .fc-3 { width: 100px; height: 100px; border-color: rgba(219, 39, 119, 0.1); top: 50%; left: 50%; animation-duration: 15s; }
+    
+    @keyframes floatRotate {
+      from { transform: translate(0, 0) rotate(0deg); }
+      to { transform: translate(20px, -20px) rotate(360deg); }
+    }
+    
+    .main-wrap {
+      position: relative;
+      z-index: 10;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 1.5rem;
+    }
+    
+    .card {
+      background: linear-gradient(170deg, rgba(30, 16, 40, 0.95), rgba(18, 8, 26, 0.98));
+      border: 1px solid var(--border);
+      border-radius: 32px;
+      max-width: 500px;
+      width: 100%;
+      overflow: hidden;
+      box-shadow: 0 0 80px rgba(168, 85, 247, 0.1), 0 30px 60px rgba(0, 0, 0, 0.5);
+      opacity: 0;
+      animation: cardSlide 0.9s ease-out 0.2s forwards;
+    }
+    
+    @keyframes cardSlide {
+      from { opacity: 0; transform: translateY(40px) scale(0.97); }
+      to { opacity: 1; transform: translateY(0) scale(1); }
+    }
+    
+    .top-section {
+      background: linear-gradient(180deg, rgba(168, 85, 247, 0.12), transparent);
+      padding: 2.5rem 2rem;
+      text-align: center;
+      position: relative;
+    }
+    
+    .top-section::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 60%;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--accent), transparent);
+    }
+    
+    .date-label {
+      display: inline-block;
+      background: linear-gradient(135deg, var(--purple), var(--magenta));
+      color: white;
+      padding: 0.35rem 1rem;
+      border-radius: 20px;
+      font-size: 0.7rem;
+      font-weight: 600;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      margin-bottom: 1.5rem;
+    }
+    
+    .photo-container {
+      position: relative;
+      width: 125px;
+      height: 125px;
+      margin: 0 auto 1.5rem;
+    }
+    
+    .photo-ring-outer {
+      position: absolute;
+      inset: -8px;
+      border-radius: 50%;
+      background: conic-gradient(from 0deg, var(--purple), var(--accent), var(--magenta), var(--accent), var(--purple));
+      animation: ringSpin 4s linear infinite;
+    }
+    
+    @keyframes ringSpin { to { transform: rotate(360deg); } }
+    
+    .photo-ring-inner {
+      position: absolute;
+      inset: 2px;
+      background: var(--bg-card);
+      border-radius: 50%;
+    }
+    
+    .photo-container img {
+      position: absolute;
+      inset: 5px;
+      width: calc(100% - 10px);
+      height: calc(100% - 10px);
+      object-fit: cover;
+      border-radius: 50%;
+    }
+    
+    .name-title {
+      font-size: 2.5rem;
+      font-weight: 700;
+      background: linear-gradient(135deg, var(--accent-light), var(--accent));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin-bottom: 0.25rem;
+    }
+    
+    .subtitle { font-size: 0.8rem; letter-spacing: 4px; text-transform: uppercase; color: var(--accent-deep); }
+    
+    .body-section { padding: 2rem; }
+    
+    .message {
+      font-size: 1rem;
+      line-height: 1.9;
+      color: rgba(254, 247, 255, 0.85);
+      text-align: center;
+      opacity: 0;
+      animation: fadeIn 0.7s ease-out 0.5s forwards;
+    }
+    
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    
+    .highlight { color: var(--accent-light); font-weight: 600; }
+    
+    .divider-line {
+      width: 80px;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, var(--purple), var(--accent), var(--magenta), transparent);
+      margin: 1.5rem auto;
+      opacity: 0;
+      animation: fadeIn 0.7s ease-out 0.7s forwards;
+    }
+    
+    .quote-container {
+      margin: 1.5rem 0;
+      padding: 1.3rem;
+      background: rgba(147, 51, 234, 0.08);
+      border-radius: 16px;
+      border: 1px solid rgba(147, 51, 234, 0.15);
+      opacity: 0;
+      animation: fadeIn 0.7s ease-out 0.9s forwards;
+    }
+    
+    .quote-text {
+      font-family: 'Cinzel', serif;
+      font-size: 1.05rem;
+      font-style: italic;
+      color: var(--accent-light);
+      text-align: center;
+    }
+    
+    .signature-block {
+      text-align: center;
+      margin-top: 1.5rem;
+      opacity: 0;
+      animation: fadeIn 0.7s ease-out 1.1s forwards;
+    }
+    
+    .signature-text { font-size: 0.9rem; color: var(--accent-deep); font-style: italic; }
+    
+    /* Botones */
+    .btn-container {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      margin-top: 2rem;
+      align-items: center;
+    }
+
+    .celebrate-btn, .gift-btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.7rem;
+      width: 100%;
+      max-width: 280px;
+      padding: 1rem 1.5rem;
+      border: none;
+      border-radius: 50px;
+      font-family: 'Raleway', sans-serif;
+      font-size: 0.95rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+      opacity: 0;
+      animation: fadeIn 0.7s ease-out 1.3s forwards;
+    }
+
+    .celebrate-btn {
+      background: linear-gradient(135deg, var(--purple), var(--accent), var(--magenta));
+      background-size: 200% 200%;
+      color: white;
+      box-shadow: 0 8px 35px rgba(232, 121, 249, 0.35);
+      animation: fadeIn 0.7s ease-out 1.3s forwards, bgShift 4s ease-in-out infinite;
+    }
+
+    .gift-btn {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid var(--accent);
+      color: var(--accent-light);
+      box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+    }
+    
+    @keyframes bgShift {
+      0%, 100% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+    }
+    
+    .celebrate-btn:hover, .gift-btn:hover { 
+      transform: scale(1.05) translateY(-3px); 
+      box-shadow: 0 12px 45px rgba(232, 121, 249, 0.45); 
+    }
+
+    .gift-btn:hover {
+        background: rgba(232, 121, 249, 0.15);
+    }
+    
+    .btn-icon { font-size: 1.4rem; animation: wobble 2s ease-in-out infinite; }
+    
+    @keyframes wobble {
+      0%, 100% { transform: rotate(-5deg); }
+      50% { transform: rotate(5deg); }
+    }
+    
+    #celebrationCanvas { position: fixed; inset: 0; z-index: 300; pointer-events: none; }
+    
+    .modal-overlay {
+      position: fixed;
+      inset: 0;
+      z-index: 400;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 1.5rem;
+      opacity: 0;
+      visibility: hidden;
+      transition: all 0.4s ease;
+    }
+    
+    .modal-overlay.active { opacity: 1; visibility: visible; }
+    
+    .modal-backdrop {
+      position: absolute;
+      inset: 0;
+      background: rgba(18, 8, 26, 0.6);
+      backdrop-filter: blur(4px);
+    }
+    
+    .modal-content {
+      position: relative;
+      background: linear-gradient(170deg, rgba(30, 16, 40, 0.95), rgba(18, 8, 26, 0.98));
+      border: 1px solid var(--border);
+      border-radius: 28px;
+      padding: 2.5rem 2rem;
+      max-width: 380px;
+      text-align: center;
+      transform: scale(0.85);
+      transition: transform 0.4s ease;
+    }
+    
+    .modal-overlay.active .modal-content { transform: scale(1); }
+    
+    .modal-date {
+      display: inline-block;
+      background: linear-gradient(135deg, var(--purple), var(--magenta));
+      color: white;
+      padding: 0.3rem 0.9rem;
+      border-radius: 15px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 2px;
+      margin-bottom: 1rem;
+    }
+    
+    .modal-title {
+      font-size: 1.9rem;
+      background: linear-gradient(135deg, var(--accent-light), var(--magenta));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin-bottom: 0.8rem;
+    }
+    
+    .modal-text { color: rgba(254, 247, 255, 0.82); line-height: 1.75; margin-bottom: 1.5rem; font-size: 0.95rem; }
+    
+    .close-btn {
+      background: transparent;
+      border: 2px solid var(--accent);
+      color: var(--accent-light);
+      padding: 0.6rem 1.8rem;
+      border-radius: 25px;
+      font-family: 'Raleway', sans-serif;
+      font-size: 0.9rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+    
+    .close-btn:hover { background: var(--accent); color: white; }
+
+    @media (max-width: 640px) {
+      .top-section { padding: 2rem 1.5rem; }
+      .body-section { padding: 1.5rem; }
+      .name-title { font-size: 2.1rem; }
+    }
+  </style>
+</head>
+<body>
+  <canvas id="celebrationCanvas"></canvas>
+  
+  <div class="bg-layer">
+    <div class="floating-elements">
+      <div class="float-circle fc-1"></div>
+      <div class="float-circle fc-2"></div>
+      <div class="float-circle fc-3"></div>
+    </div>
+  </div>
+  
+  <div class="main-wrap">
+    <div class="card">
+      <div class="top-section">
+        <span class="date-label">8 de Marzo</span>
+        <div class="photo-container">
+          <div class="photo-ring-outer"></div>
+          <div class="photo-ring-inner"></div>
+          <img src="angie.jpg" alt="Angie">
+        </div>
+        <h1 class="font-display name-title">Angie</h1>
+        <p class="subtitle">Feliz Día Internacional de la Mujer, Angie.</p>
+      </div>
+      
+      <div class="body-section">
+        <p class="message">
+          Quiero aprovechar esta fecha para agradecerte por la oportunidad que me brindaste durante el proceso de selección. Haber podido avanzar en aquella entrevista grupal y formar parte de GDH – Ajinomoto Perú ha sido una experiencia muy valiosa para mí.
+        </p>
+        
+        <div class="divider-line"></div>
+        
+        <p class="message">
+          Gracias por confiar en mi potencial y por permitirme seguir creciendo y aprendiendo dentro del equipo.
+        </p>
+        
+        <div class="quote-container">
+          <p class="quote-text">Te deseo un excelente día.</p>
+        </div>
+        
+        <div class="signature-block">
+          <p class="signature-text">Con gratitud sincera<br>Alvaro</p>
+        </div>
+        
+        <div class="btn-container">
+            <button class="celebrate-btn" id="celebrateBtn">
+                <span class="btn-icon">✨</span>
+                <span>Presiona aquí</span>
+            </button>
+
+            <button class="gift-btn" id="giftBtn">
+                <span class="btn-icon">🎁</span>
+                <span>Un detalle especial</span>
+            </button>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <div class="modal-overlay" id="modal">
+    <div class="modal-backdrop" id="modalBackdrop"></div>
+    <div class="modal-content">
+      <span class="modal-date">DIA DE LA MUJER</span>
+      <h2 class="font-display modal-title">Feliz 8M, Angie</h2>
+      <p class="modal-text">
+        Angie, en este Día Internacional de la Mujer te deseo un día lleno de reconocimiento, 
+        inspiración y grandes logros. Que tu liderazgo y visión continúen marcando 
+        una diferencia positiva en quienes te rodean.
+      </p>
+      <button class="close-btn" id="closeModal">Cerrar</button>
+    </div>
+  </div>
+
+  <div class="modal-overlay" id="giftModal">
+    <div class="modal-backdrop" id="giftModalBackdrop"></div>
+    <div class="modal-content">
+      <span class="modal-date" id="giftStatusLabel">PRÓXIMAMENTE</span>
+      <h2 class="font-display modal-title" id="giftTitle">Un momento...</h2>
+      <p class="modal-text" id="giftText">
+        Cargando sorpresa...
+      </p>
+      <button class="close-btn" id="closeGiftModal">Entendido</button>
+    </div>
+  </div>
+
+  <script>
+    const canvas = document.getElementById('celebrationCanvas');
+    const ctx = canvas.getContext('2d');
+    
+    function resizeCanvas() { canvas.width = window.innerWidth; canvas.height = window.innerHeight; }
+    resizeCanvas();
+    window.addEventListener('resize', resizeCanvas);
+    
+    const colors = ['#9333ea', '#a855f7', '#c084fc', '#e879f9', '#f0abfc', '#db2777', '#ec4899'];
+    
+    class ElegantBalloon {
+      constructor() {
+        this.x = Math.random() * canvas.width;
+        this.y = canvas.height + 120;
+        this.radius = 28 + Math.random() * 22;
+        this.color = colors[Math.floor(Math.random() * colors.length)];
+        this.speedY = -(2 + Math.random() * 1.5);
+        this.wobble = Math.random() * Math.PI * 2;
+        this.wobbleSpeed = 0.025 + Math.random() * 0.015;
+        this.stringLength = 45 + Math.random() * 35;
+        this.scale = 0;
+      }
+      
+      update() {
+        this.y += this.speedY;
+        this.wobble += this.wobbleSpeed;
+        this.x += Math.sin(this.wobble) * 1.5;
+        this.scale = Math.min(1, this.scale + 0.05);
+      }
+      
+      draw() {
+        ctx.save();
+        ctx.translate(this.x, this.y);
+        ctx.scale(this.scale, this.scale);
+        
+        ctx.beginPath();
+        ctx.ellipse(0, 0, this.radius, this.radius * 1.2, 0, 0, Math.PI * 2);
+        const grad = ctx.createRadialGradient(-this.radius * 0.25, -this.radius * 0.35, 0, 0, 0, this.radius * 1.2);
+        grad.addColorStop(0, this.lighten(this.color, 45));
+        grad.addColorStop(0.5, this.color);
+        grad.addColorStop(1, this.darken(this.color, 25));
+        ctx.fillStyle = grad;
+        ctx.fill();
+        
+        ctx.beginPath();
+        ctx.ellipse(-this.radius * 0.25, -this.radius * 0.4, this.radius * 0.18, this.radius * 0.3, -0.4, 0, Math.PI * 2);
+        ctx.fillStyle = 'rgba(255,255,255,0.45)';
+        ctx.fill();
+        
+        ctx.beginPath();
+        ctx.moveTo(-5, this.radius * 1.2);
+        ctx.lineTo(0, this.radius * 1.2 + 10);
+        ctx.lineTo(5, this.radius * 1.2);
+        ctx.fillStyle = this.darken(this.color, 35);
+        ctx.fill();
+        
+        ctx.beginPath();
+        ctx.moveTo(0, this.radius * 1.2 + 10);
+        ctx.quadraticCurveTo(Math.sin(this.wobble * 2) * 6, this.radius * 1.2 + this.stringLength / 2, Math.sin(this.wobble * 2.5) * 3, this.radius * 1.2 + this.stringLength);
+        ctx.strokeStyle = 'rgba(255,255,255,0.3)';
+        ctx.lineWidth = 1.5;
+        ctx.stroke();
+        
+        ctx.restore();
+      }
+      
+      lighten(c, p) { const n = parseInt(c.slice(1), 16); const a = Math.round(2.55 * p); return '#' + (0x1000000 + Math.min(255, (n >> 16) + a) * 0x10000 + Math.min(255, ((n >> 8) & 0xFF) + a) * 0x100 + Math.min(255, (n & 0xFF) + a)).toString(16).slice(1); }
+      darken(c, p) { const n = parseInt(c.slice(1), 16); const a = Math.round(2.55 * p); return '#' + (0x1000000 + Math.max(0, (n >> 16) - a) * 0x10000 + Math.max(0, ((n >> 8) & 0xFF) - a) * 0x100 + Math.max(0, (n & 0xFF) - a)).toString(16).slice(1); }
+      isDone() { return this.y < -180; }
+    }
+    
+    class ColorConfetti {
+      constructor() {
+        this.x = Math.random() * canvas.width;
+        this.y = -15;
+        this.size = 6 + Math.random() * 10;
+        this.color = colors[Math.floor(Math.random() * colors.length)];
+        this.speedY = 2.5 + Math.random() * 2.5;
+        this.speedX = (Math.random() - 0.5) * 3;
+        this.rotation = Math.random() * Math.PI * 2;
+        this.rotSpeed = (Math.random() - 0.5) * 0.12;
+        this.type = Math.floor(Math.random() * 3);
+        this.alpha = 1;
+      }
+      
+      update() {
+        this.y += this.speedY;
+        this.x += this.speedX + Math.sin(this.y * 0.02) * 1;
+        this.rotation += this.rotSpeed;
+        this.speedY += 0.025;
+        if (this.y > canvas.height * 0.75) this.alpha -= 0.018;
+      }
+      
+      draw() {
+        if (this.alpha <= 0) return;
+        ctx.save();
+        ctx.globalAlpha = this.alpha;
+        ctx.translate(this.x, this.y);
+        ctx.rotate(this.rotation);
+        ctx.fillStyle = this.color;
+        
+        if (this.type === 0) { ctx.fillRect(-this.size / 2, -this.size / 5, this.size, this.size / 2.5); }
+        else if (this.type === 1) { ctx.beginPath(); ctx.arc(0, 0, this.size / 3.5, 0, Math.PI * 2); ctx.fill(); }
+        else { this.star(0, 0, 5, this.size / 2, this.size / 4); }
+        ctx.restore();
+      }
+      
+      star(cx, cy, s, o, i) {
+        let r = Math.PI / 2 * 3; const st = Math.PI / s;
+        ctx.beginPath(); ctx.moveTo(cx, cy - o);
+        for (let j = 0; j < s; j++) { ctx.lineTo(cx + Math.cos(r) * o, cy + Math.sin(r) * o); r += st; ctx.lineTo(cx + Math.cos(r) * i, cy + Math.sin(r) * i); r += st; }
+        ctx.lineTo(cx, cy - o); ctx.closePath(); ctx.fill();
+      }
+      
+      isDone() { return this.y > canvas.height + 30 || this.alpha <= 0; }
+    }
+    
+    class GlowParticle {
+      constructor() {
+        this.x = Math.random() * canvas.width;
+        this.y = Math.random() * canvas.height;
+        this.size = 1.5 + Math.random() * 2.5;
+        this.color = colors[Math.floor(Math.random() * colors.length)];
+        this.phase = Math.random() * Math.PI * 2;
+        this.speed = 0.015 + Math.random() * 0.025;
+        this.maxAlpha = 0.3 + Math.random() * 0.35;
+      }
+      update() { this.phase += this.speed; }
+      draw() { const alpha = this.maxAlpha * (0.5 + 0.5 * Math.sin(this.phase)); ctx.save(); ctx.globalAlpha = alpha; ctx.fillStyle = this.color; ctx.shadowColor = this.color; ctx.shadowBlur = 6; ctx.beginPath(); ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2); ctx.fill(); ctx.restore(); }
+    }
+    
+    let balloons = [], confettis = [], glows = [], active = false;
+    
+    function initGlows() { glows = []; for (let i = 0; i < 50; i++) glows.push(new GlowParticle()); }
+    
+    function startCelebration() {
+      active = true;
+      for (let i = 0; i < 15; i++) setTimeout(() => balloons.push(new ElegantBalloon()), i * 200);
+      for (let i = 0; i < 90; i++) setTimeout(() => confettis.push(new ColorConfetti()), i * 35);
+      initGlows();
+      animate();
+      setTimeout(() => document.getElementById('modal').classList.add('active'), 1800);
+    }
+    
+    function animate() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      glows.forEach(g => { g.update(); g.draw(); });
+      balloons = balloons.filter(b => !b.isDone()); balloons.forEach(b => { b.update(); b.draw(); });
+      confettis = confettis.filter(c => !c.isDone()); confettis.forEach(c => { c.update(); c.draw(); });
+      if (active) requestAnimationFrame(animate);
+    }
+    
+    // Lógica del Segundo Botón (Regalo)
+    function checkGift() {
+      const now = new Date();
+      // Fecha objetivo: 9 de marzo de 2026 a las 8:00 AM
+      const targetDate = new Date('2026-03-09T08:00:00');
+      
+      const modal = document.getElementById('giftModal');
+      const title = document.getElementById('giftTitle');
+      const text = document.getElementById('giftText');
+      const label = document.getElementById('giftStatusLabel');
+
+      if (now < targetDate) {
+        label.textContent = "PRÓXIMAMENTE";
+        title.textContent = "¡Casi listo!";
+        text.innerHTML = "Este regalo se activará a las <strong>8:00 AM del 09/03/2026</strong>.<br><br>Vuelve mañana para descubrirlo.";
+      } else {
+        label.textContent = "REGALO ACTIVADO";
+        title.textContent = "Para ti, Angie";
+        text.innerHTML = "¡Espero que te haya gustado mucho tu regalo! <br><br> Gracias por ser parte de este camino.";
+      }
+      
+      modal.classList.add('active');
+    }
+    
+    // Eventos
+    document.getElementById('celebrateBtn').addEventListener('click', startCelebration);
+    document.getElementById('giftBtn').addEventListener('click', checkGift);
+    
+    document.getElementById('closeModal').addEventListener('click', () => document.getElementById('modal').classList.remove('active'));
+    document.getElementById('modalBackdrop').addEventListener('click', () => document.getElementById('modal').classList.remove('active'));
+    
+    document.getElementById('closeGiftModal').addEventListener('click', () => document.getElementById('giftModal').classList.remove('active'));
+    document.getElementById('giftModalBackdrop').addEventListener('click', () => document.getElementById('giftModal').classList.remove('active'));
+  </script>
+</body>
+</html>
